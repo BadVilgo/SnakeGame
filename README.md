@@ -9,12 +9,7 @@
 * [Status](#status)
 
 ## General info
-My project is a console Quiz game. Reason why I did it > To develop my JS skills:
--Objects 
--Function Constructors
--Prototype Chain
--First Class Functions
--Immediately Invoked Function Expressions (IIFE)
+My project is a Snake game. I did it to develop my JS skills and have some fun with game creation.
 
 ## Screenshots
 ![Example screenshot](img/screenshot.jpg)
@@ -23,7 +18,7 @@ My project is a console Quiz game. Reason why I did it > To develop my JS skills
 * JavaScript 
 
 ## Demo
-https://github.com/BadVilgo/xxx/
+https://github.com/BadVilgo/SnakeGame/
 
 
 ## Status
