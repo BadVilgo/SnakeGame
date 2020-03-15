@@ -18,7 +18,7 @@ My project is a Snake game. I did it to develop my JS skills and have some fun w
 * JavaScript 
 
 ## Demo
-https://github.com/BadVilgo/SnakeGame/
+https://badvilgo.github.io/SnakeGame/
 
 
 ## Status
