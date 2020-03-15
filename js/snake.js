@@ -1,35 +1,50 @@
 let canvas = document.getElementById("snake");
 let ctx = canvas.getContext("2d");
-let position = ['0','100'];
+let position = ['100','100'];
 let x = parseInt(position[0]);
 let y = parseInt(position[1]);
 
 //prawo x+10,y
 function right(){
-    setInterval(function righty(){ 
-        //console.log(x,y,position);
-        x = parseInt(position[1]);
+        x = parseInt(position[0]);
         for(let i=x; i<=x+10; i=i+10){ 
-                position.pop(); //zabieram z array
-                position.push(i); //push array
+                position.shift(); //zabieram z array
+                position.unshift(i); //push array
                 ctx.fillStyle = "red"; //rysuje new
                 ctx.fillRect(x, y, 10, 10); 
                 ctx.fillStyle = "black"; //usuwam poprz
                 ctx.fillRect(x-10, y, 10, 10);          
-        }
-    }, 500);
-    if (e.keyCode == '38' || '40' || '37') {
-        clearInterval(righty);
-    }
-
-    
+        } 
 }
 
+//lewo x-10,y//
+function left(){
+    x = parseInt(position[0]);
+    for(let i=x; i>=x-10; i=i-10){ 
+            position.shift(); //zabieram z array
+            position.unshift(i); //push array
+            ctx.fillStyle = "red"; //rysuje new
+            ctx.fillRect(x, y, 10, 10); 
+            ctx.fillStyle = "black"; //usuwam poprz
+            ctx.fillRect(x+10, y, 10, 10);          
+    } 
+}
+
+//góra x,y-10//
+function up(){
+    y = parseInt(position[1]);
+    for(let i=y; i>=y-10; i=i-10){ 
+            position.pop(); //zabieram z array
+            position.push(i); //push array
+            ctx.fillStyle = "red"; //rysuje new
+            ctx.fillRect(x, y, 10, 10); 
+            ctx.fillStyle = "black"; //usuwam poprz
+            ctx.fillRect(x, y+10, 10, 10);          
+    }
+}
 
 //dół x,y+10
 function down(){
-    setInterval(function downy(){ 
-        //console.log(x,y,position);
         y = parseInt(position[1]);
         for(let i=y; i<=y+10; i=i+10){ 
                 position.pop(); //zabieram z array
@@ -39,32 +54,46 @@ function down(){
                 ctx.fillStyle = "black"; //usuwam poprz
                 ctx.fillRect(x, y-10, 10, 10);          
         }
-    }, 500);
 }
+
 //down();
+let downInt;
+let rightInt;
+let upInt;
+let leftInt;
 
 document.onkeydown = checkKey;
-
 function checkKey(e) {
-
-    e = e || window.event;
-
     if (e.keyCode == '38') {
         // up arrow
+        clearInterval(rightInt);
+        clearInterval(leftInt);
+        clearInterval(downInt);
+        upInt = setInterval(up,500);
     }
     else if (e.keyCode == '40') {
+        //down();
+        clearInterval(rightInt);
+        clearInterval(leftInt);
+        clearInterval(upInt);
+        downInt = setInterval(down,500);
         
-       
-        down();
     }
     else if (e.keyCode == '37') {
        // left arrow
+       clearInterval(rightInt);
+       clearInterval(downInt);
+       clearInterval(upInt);
+       leftInt = setInterval(left,500);
     }
     else if (e.keyCode == '39') {
+        //right();
+        clearInterval(leftInt);
+        clearInterval(upInt);
+        clearInterval(downInt);
+        rightInt = setInterval(right,500);
         
-        right();
     }
-
 }
 
 
