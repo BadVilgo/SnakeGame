@@ -1,4 +1,4 @@
-# xxx
+# SNAKE GAME
 
 ## Table of contents
 
