@@ -9,11 +9,19 @@ let lastPosition = [];
 function random(){
    return Math.floor(Math.random()*29+1)*10;
 } 
-let a = random();
-let b = random();
-let food = [a,b];
+
+let food = [random(),random()];
 ctx.fillStyle = "yellow"; //rysuje new
-ctx.fillRect(a, b, 10, 10); 
+ctx.fillRect(food[0], food[1], 10, 10); 
+
+function generateFood(){
+    food.pop();
+    food.pop();
+    food.push(random());
+    food.push(random());
+    ctx.fillStyle = "yellow"; //rysuje new
+    ctx.fillRect(food[0], food[1], 10, 10); 
+}
 
 //score
 let score=0;
@@ -24,6 +32,7 @@ function addScore(){
         console.log(position+ " snake x,y");
         score++;
         document.getElementById('score').innerHTML="Score: "+score;
+        generateFood();
     }
 }
 
