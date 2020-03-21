@@ -4,6 +4,7 @@ let position = ['100','100'];
 let x = parseInt(position[0]);
 let y = parseInt(position[1]);
 let lastPosition = [];
+let tail = [];
 
 //jedzenie węża
 function random(){
@@ -41,21 +42,27 @@ function addScore(){
 ctx.fillStyle = "red"; //rysuje new
 ctx.fillRect(x, y, 10, 10); 
 
+//dodawanie ogona
+function addTail(){
+    tail.unshift([lastPosition[0],lastPosition[1]]); 
+    tail.splice(score+1);
+    ctx.fillStyle = "#3e3e3e"; //usuwa poprz
+    ctx.fillRect(tail[score][0], tail[score][1], 10, 10);
+}
+
 //wąż ruch
-//prawo x+10,y
+//prawo x+10,y//do dokończenia sob
 function right(){
         lastPosition[0] = x;
         lastPosition[1] = y;
+        //let array.push(lastPosition);
         x=x+10;
         position.shift(); //zabieram z array
         position.unshift(x); //push array
         ctx.fillStyle = "red"; //rysuje new
         ctx.fillRect(x, y, 10, 10); 
-        ctx.fillStyle = "#3e3e3e"; //usuwa poprz
-        ctx.fillRect(lastPosition[0], lastPosition[1], 10, 10);
-        addScore();  
-        //console.log(lastPosition + " last");   
-        //console.log(position + " position");
+        addScore();
+        addTail();
 }
 
 //lewo x-10,y//
@@ -67,9 +74,10 @@ function left(){
     position.unshift(x); //push array
     ctx.fillStyle = "red"; //rysuje new
     ctx.fillRect(x, y, 10, 10); 
-    ctx.fillStyle = "#3e3e3e"; //usuwa poprz
-    ctx.fillRect(lastPosition[0], lastPosition[1], 10, 10);
-    addScore();  
+    //ctx.fillStyle = "#3e3e3e"; //usuwa poprz
+    //ctx.fillRect(lastPosition[0], lastPosition[1], 10, 10);
+    addScore();
+    addTail();  
 }
 
 //góra x,y-10//
@@ -81,9 +89,10 @@ function up(){
     position.push(y); //push array
     ctx.fillStyle = "red"; //rysuje new
     ctx.fillRect(x, y, 10, 10); 
-    ctx.fillStyle = "#3e3e3e"; //usuwa poprz
-    ctx.fillRect(lastPosition[0], lastPosition[1], 10, 10);
+    //ctx.fillStyle = "#3e3e3e"; //usuwa poprz
+    //ctx.fillRect(lastPosition[0], lastPosition[1], 10, 10);
     addScore();  
+    addTail();
 }
 
 //dół x,y+10
@@ -95,10 +104,13 @@ function down(){
     position.push(y); //push array
     ctx.fillStyle = "red"; //rysuje new
     ctx.fillRect(x, y, 10, 10); 
-    ctx.fillStyle = "#3e3e3e"; //usuwa poprz
-    ctx.fillRect(lastPosition[0], lastPosition[1], 10, 10);
+    //ctx.fillStyle = "#3e3e3e"; //usuwa poprz
+    //ctx.fillRect(lastPosition[0], lastPosition[1], 10, 10);
     addScore();  
+    addTail();
 }
+
+
 
 let downInt;
 let rightInt;
