@@ -131,24 +131,27 @@ document.onkeydown = checkKey;
 function checkKey(e) {
     if (e.keyCode == '38') {
         // up arrow
-        clearInterval(rightInt);
         clearInterval(leftInt);
+        clearInterval(upInt);
         clearInterval(downInt);
+        clearInterval(rightInt);
         upInt = setInterval(up,120);
     }
     else if (e.keyCode == '40') {
         //down();
-        clearInterval(rightInt);
         clearInterval(leftInt);
         clearInterval(upInt);
+        clearInterval(downInt);
+        clearInterval(rightInt);
         downInt = setInterval(down,120);
         
     }
     else if (e.keyCode == '37') {
        // left arrow
-       clearInterval(rightInt);
-       clearInterval(downInt);
+       clearInterval(leftInt);
        clearInterval(upInt);
+       clearInterval(downInt);
+       clearInterval(rightInt);
        leftInt = setInterval(left,120);
     }
     else if (e.keyCode == '39') {
@@ -156,6 +159,7 @@ function checkKey(e) {
         clearInterval(leftInt);
         clearInterval(upInt);
         clearInterval(downInt);
+        clearInterval(rightInt);
         rightInt = setInterval(right,120);
     }
 }
