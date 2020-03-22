@@ -6,6 +6,22 @@ let y = parseInt(position[1]);
 let lastPosition = [];
 let tail = [];
 
+//przechodzenie przez ściany
+function wall(){
+    if(x>290){
+        x = 0;
+    }
+    if(x<0){
+        x = 290;
+    }
+    if(y>290){
+        y = 0;
+    }
+    if(y<0){
+        y = 290;
+    }
+}
+
 //jedzenie węża
 function random(){
    return Math.floor(Math.random()*29+1)*10;
@@ -38,7 +54,7 @@ function addScore(){
 }
 
 //wąż bez ruchu
-ctx.fillStyle = "red"; //rysuje new
+ctx.fillStyle = "limegreen"; //rysuje new
 ctx.fillRect(x, y, 10, 10); 
 
 //dodawanie ogona
@@ -55,12 +71,13 @@ function right(){
         lastPosition[0] = x;
         lastPosition[1] = y;
         x=x+10;
+        wall();
         position.shift(); //zabieram z array
         position.unshift(x); //push array
-        ctx.fillStyle = "red"; //rysuje new
+        ctx.fillStyle = "limegreen"; //rysuje new
         ctx.fillRect(x, y, 10, 10); 
         addScore();
-        addTail();
+        addTail(); 
 }
 
 //lewo x-10,y//
@@ -68,9 +85,10 @@ function left(){
     lastPosition[0] = x;
     lastPosition[1] = y;
     x=x-10;
+    wall();
     position.shift(); //zabieram z array
     position.unshift(x); //push array
-    ctx.fillStyle = "red"; //rysuje new
+    ctx.fillStyle = "limegreen"; //rysuje new
     ctx.fillRect(x, y, 10, 10); 
     addScore();
     addTail();  
@@ -81,9 +99,10 @@ function up(){
     lastPosition[0] = x;
     lastPosition[1] = y;
     y=y-10;
+    wall();
     position.pop(); //zabieram z array
     position.push(y); //push array
-    ctx.fillStyle = "red"; //rysuje new
+    ctx.fillStyle = "limegreen"; //rysuje new
     ctx.fillRect(x, y, 10, 10); 
     addScore();  
     addTail();
@@ -94,9 +113,10 @@ function down(){
     lastPosition[0] = x;
     lastPosition[1] = y;
     y=y+10;
+    wall();
     position.pop(); //zabieram z array
     position.push(y); //push array
-    ctx.fillStyle = "red"; //rysuje new
+    ctx.fillStyle = "limegreen"; //rysuje new
     ctx.fillRect(x, y, 10, 10); 
     addScore();  
     addTail();
@@ -114,14 +134,14 @@ function checkKey(e) {
         clearInterval(rightInt);
         clearInterval(leftInt);
         clearInterval(downInt);
-        upInt = setInterval(up,300);
+        upInt = setInterval(up,120);
     }
     else if (e.keyCode == '40') {
         //down();
         clearInterval(rightInt);
         clearInterval(leftInt);
         clearInterval(upInt);
-        downInt = setInterval(down,300);
+        downInt = setInterval(down,120);
         
     }
     else if (e.keyCode == '37') {
@@ -129,14 +149,14 @@ function checkKey(e) {
        clearInterval(rightInt);
        clearInterval(downInt);
        clearInterval(upInt);
-       leftInt = setInterval(left,300);
+       leftInt = setInterval(left,120);
     }
     else if (e.keyCode == '39') {
         //right();
         clearInterval(leftInt);
         clearInterval(upInt);
         clearInterval(downInt);
-        rightInt = setInterval(right,300);
+        rightInt = setInterval(right,120);
     }
 }
 
