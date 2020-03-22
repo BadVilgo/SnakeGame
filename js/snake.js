@@ -5,6 +5,16 @@ let x = parseInt(position[0]);
 let y = parseInt(position[1]);
 let lastPosition = [];
 let tail = [];
+let bgSng = document.getElementById('bcgSong');
+let sSng = document.getElementById('scrSound');
+sSng.volume = 0.3;
+
+//wąż bez ruchu
+function start() {
+    ctx.fillStyle = "limegreen"; //rysuje new
+    ctx.fillRect(x, y, 10, 10); 
+    bgSng.play();
+}
 
 //przechodzenie przez ściany
 function wall(){
@@ -48,14 +58,11 @@ function addScore(){
         console.log(food+" food x,y");
         console.log(position+ " snake x,y");
         score++;
+        sSng.play();
         document.getElementById('score').innerHTML="Score: "+score;
         generateFood();
     }
 }
-
-//wąż bez ruchu
-ctx.fillStyle = "limegreen"; //rysuje new
-ctx.fillRect(x, y, 10, 10); 
 
 //dodawanie ogona
 function addTail(){
