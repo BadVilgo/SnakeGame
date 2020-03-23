@@ -7,7 +7,8 @@ let lastPosition = [];
 let tail = [];
 let bgSng = document.getElementById('bcgSong');
 let sSng = document.getElementById('scrSound');
-sSng.volume = 0.3;
+let dead = document.getElementById('dead');
+sSng.volume = 0.4;
 
 //wąż bez ruchu
 function start() {
@@ -38,7 +39,7 @@ function random(){
 } 
 
 let food = [random(),random()];
-ctx.fillStyle = "yellow"; //rysuje new
+ctx.fillStyle = "red"; //rysuje new
 ctx.fillRect(food[0], food[1], 10, 10); 
 
 function generateFood(){
@@ -46,7 +47,7 @@ function generateFood(){
     food.pop();
     food.push(random());
     food.push(random());
-    ctx.fillStyle = "yellow"; //rysuje new
+    ctx.fillStyle = "red"; //rysuje new
     ctx.fillRect(food[0], food[1], 10, 10); 
 }
 
@@ -72,6 +73,22 @@ function addTail(){
     ctx.fillRect(tail[score][0], tail[score][1], 10, 10);
 }
 
+//ugryzienie ogona
+function canibal(){
+    for(let i = 0; i<= score; i++){
+        if(position[0]==tail[i][0] && position[1] == tail[i][1]){
+            dead.play();
+            ctx.font = "25px Arial bold";
+            ctx.fillStyle = 'yellow';
+            ctx.fillText("You have bitten your tail!", 10, 100);
+            ctx.fillText("Try one more time", 10, 140);
+            setInterval(function(){ 
+                location.reload(); 
+            }, 1500);
+        }
+    }
+}
+
 //wąż ruch
 //prawo x+10,y//do dokończenia sob
 function right(){
@@ -85,6 +102,7 @@ function right(){
         ctx.fillRect(x, y, 10, 10); 
         addScore();
         addTail(); 
+        canibal()
 }
 
 //lewo x-10,y//
@@ -98,7 +116,8 @@ function left(){
     ctx.fillStyle = "limegreen"; //rysuje new
     ctx.fillRect(x, y, 10, 10); 
     addScore();
-    addTail();  
+    addTail(); 
+    canibal() 
 }
 
 //góra x,y-10//
@@ -113,6 +132,7 @@ function up(){
     ctx.fillRect(x, y, 10, 10); 
     addScore();  
     addTail();
+    canibal()
 }
 
 //dół x,y+10
@@ -127,6 +147,7 @@ function down(){
     ctx.fillRect(x, y, 10, 10); 
     addScore();  
     addTail();
+    canibal()
 }
 
 let downInt;
